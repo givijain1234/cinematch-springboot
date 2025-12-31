@@ -10,14 +10,24 @@ Imagine a high-demand movie premiere where thousands of fans hit the "Book" butt
 * **Language:** Java 17+
 * **Concurrency:** `ReentrantLock`, `ConcurrentHashMap`, `AtomicInteger`
 * **Interface:** Dual-mode (REST API + Interactive Admin Terminal)
+* **Build Tool:** Maven
 
-### 💡 Core Engineering Highlights
-* **Fine-Grained Locking:** We implement locking on a *per-seat* basis. This ensures that booking seat **A1** does not block someone else from booking seat **C5**, maximising system throughput.
-* **Dynamic Surge Pricing:** The system monitors theater occupancy. Once the "House Full" threshold (exceeding 50%) is reached, prices dynamically adjust by 20% to simulate real-world supply/demand logic.
-* **Deadlock Prevention:** For group bookings, the system sorts seat IDs before acquiring locks, preventing circular wait conditions.
+### 🚀 Core Engineering Features
+
+* **Thread-Safe Reservations**: Implemented fine-grained locking using `ReentrantLock` to ensure that no two users can book the same seat simultaneously.
+* **Deadlock Prevention**: Utilised a **Global Lock Ordering** strategy by sorting Seat IDs before acquisition, ensuring a consistent locking hierarchy.
+* **Dynamic Pricing Engine**: Integrated atomic counter logic where ticket prices adjust dynamically based on real-time theatre occupancy.
+* **RESTful API Architecture**: Developed a clean controller layer to handle seat viewing and reservations via structured JSON endpoints.
+* **Interactive Admin Console**: Includes a live CLI dashboard to visualise the theatre map and perform manual administrative overrides.
+* 
+---
 
 ### 🧪 How to Run & Use (Example Flow)
 
+#### Prerequisites
+* Ensure you have **Java 17 or 21** installed. 
+* Ensure **Maven** is installed (or use the included wrapper `./mvnw`).
+  
 #### 1. Start the Application
 Run `CineMatchApplication.java`. You will see the **Live Admin Map** appear in your terminal.
 
